@@ -1,0 +1,1063 @@
+/* =============================================================================
+   深渊图书馆 · Library of Abyss
+   适配当前 client 三栏界面的旧版紫色主题
+   基础配色直接回用历史 styles.css 中的靛蓝 / 虚空 / 琥珀体系
+   ============================================================================= */
+
+:root {
+  /* CSS 自定义属性（变量）：集中管理旧版主题中的颜色、字体、阴影与圆角。 */
+
+  /* 主色：直接沿用历史版本的紫色靛蓝体系。 */
+  --abyss-deep: #0a0a14; /* 最深背景色，作为页面整体底色。 */
+  --abyss-void: #0d0d1a; /* 虚空色，用于面板和背景渐变的深处。 */
+  --abyss-indigo: #1a1a2e; /* 历史版本的主靛蓝色，也是用户提到的偏紫底色。 */
+  --abyss-midnight: #16213e; /* 午夜蓝，用于局部高光和次级背景。 */
+  --abyss-navy: #0f3460; /* 更亮的深蓝，用于层次与边缘提亮。 */
+
+  /* 暖色：继续使用旧版的琥珀烛光，和紫色背景形成对比。 */
+  --amber-soft: #d4a574; /* 常规文字与强调色。 */
+  --amber-glow: #e8c9a0; /* 标题和高亮时更亮的琥珀色。 */
+  --amber-faint: rgba(212, 165, 116, 0.15); /* 淡琥珀光晕。 */
+  --candle-glow: rgba(255, 200, 120, 0.08); /* 烛光中心光晕。 */
+  --candle-flicker: rgba(255, 220, 150, 0.12); /* 烛光闪烁时的外圈亮部。 */
+
+  /* 辅助：保留旧版雾气与墨色面板气质。 */
+  --mist: rgba(100, 120, 160, 0.12); /* 漂浮雾气。 */
+  --ink-bloom: rgba(26, 26, 46, 0.85); /* 深色面板的主要底色。 */
+  --violet-line: rgba(60, 50, 80, 0.2); /* 书架线条与局部紫色纹理。 */
+  --notice-success: rgba(88, 142, 108, 0.18); /* 成功提示底色。 */
+  --notice-failure: rgba(167, 78, 72, 0.2); /* 失败提示底色。 */
+
+  /* 字体：回用旧版字体策略。 */
+  --font-display: "Cormorant Garamond", "Noto Serif SC", "Source Han Serif", serif; /* 标题字体。 */
+  --font-ui: "Inter", "Noto Sans SC", "Source Han Sans", system-ui, sans-serif; /* UI 字体。 */
+
+  /* 阴影与圆角：在当前布局中复用旧版氛围。 */
+  --shadow-strong: 0 28px 70px rgba(0, 0, 0, 0.4); /* 顶层面板阴影。 */
+  --shadow-soft: 0 14px 32px rgba(0, 0, 0, 0.24); /* 常规卡片阴影。 */
+  --radius-xl: 28px; /* 大面板圆角。 */
+  --radius-lg: 20px; /* 中型卡片圆角。 */
+  --radius-md: 14px; /* 输入框与小部件圆角。 */
+}
+
+* {
+  /* 全局重置：统一盒模型，并移除默认留白。 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* 页面根节点维持旧版沉浸式全屏舞台。 */
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden; /* 桌面端滚动交给内部面板。 */
+  background: var(--abyss-deep);
+  color: var(--amber-soft);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* 背景光效和视差层的定位上下文。 */
+  position: relative;
+}
+
+body::before {
+  /* 旧版书架背景：用历史版本同风格的紫色纵线和深色渐变重建舞台。 */
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% -12%, rgba(232, 201, 160, 0.06), transparent 32%),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      var(--abyss-indigo) 30%,
+      var(--abyss-void) 72%,
+      var(--abyss-deep) 100%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 60px,
+      var(--violet-line) 60px,
+      var(--violet-line) 62px
+    );
+  opacity: 0.92;
+  animation: parallax-drift 30s linear infinite;
+  pointer-events: none;
+}
+
+body::after {
+  /* 烛光层：保留旧版两侧暖色光团，但整体仍让紫色背景主导。 */
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 12% 76%, var(--candle-flicker) 0%, var(--candle-glow) 12%, transparent 28%),
+    radial-gradient(circle at 88% 76%, var(--candle-flicker) 0%, var(--candle-glow) 12%, transparent 28%),
+    radial-gradient(circle at 50% 24%, rgba(100, 120, 160, 0.08), transparent 30%);
+  filter: blur(18px);
+  animation: candle-flicker 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+#root {
+  /* 应用挂载点占满视口，并建立独立层叠上下文。 */
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+button,
+input,
+textarea {
+  /* 表单控件统一继承字体和颜色。 */
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  /* 移除浏览器默认按钮样式，完全交给自定义主题。 */
+  border: none;
+  background: none;
+}
+
+img {
+  /* 图片默认不超出父容器宽度。 */
+  max-width: 100%;
+}
+
+::selection {
+  /* 文本选中态也维持暖色高亮。 */
+  background: rgba(212, 165, 116, 0.2);
+  color: #fff4e4;
+}
+
+/* =============================================================================
+   错误页与主舞台
+   ============================================================================= */
+
+.fatal-shell,
+.client-shell {
+  /* 两个根级容器都至少占满一整屏。 */
+  min-height: 100vh;
+}
+
+.fatal-shell {
+  /* 初始化失败页也沿用旧版深色戏剧感。 */
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  gap: 0.8rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.fatal-shell h1 {
+  /* 大标题使用旧版衬线显示字体。 */
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--amber-glow);
+  text-shadow: 0 0 40px rgba(212, 165, 116, 0.12);
+}
+
+.fatal-shell p {
+  /* 错误说明控制宽度，避免行过长。 */
+  max-width: 36rem;
+  color: rgba(232, 201, 160, 0.78);
+}
+
+.client-shell {
+  /* 当前 client 根布局：顶部引导区 + 下方工作区。 */
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.client-shell::before {
+  /* 迷雾层：维持旧版书库里那种轻微漂浮的冷色薄雾。 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 18% 30%, var(--mist) 0%, transparent 35%),
+    radial-gradient(ellipse at 78% 20%, rgba(100, 120, 160, 0.08) 0%, transparent 32%),
+    radial-gradient(ellipse at 55% 78%, rgba(60, 50, 80, 0.16) 0%, transparent 26%);
+  filter: blur(32px);
+  animation: mist-drift 25s linear infinite;
+  pointer-events: none;
+}
+
+.client-shell::after {
+  /* 暗角层：帮助视线聚拢到中央工作区。 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at center, transparent 52%, rgba(4, 4, 10, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* =============================================================================
+   顶部引导区
+   ============================================================================= */
+
+.hero-panel {
+  /* 顶部引导面板用当前结构承载旧版大厅标题感。 */
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid rgba(212, 165, 116, 0.16);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(26, 26, 46, 0.92) 0%, rgba(13, 13, 26, 0.94) 100%),
+    linear-gradient(120deg, rgba(212, 165, 116, 0.06), transparent 38%);
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+
+.hero-panel::before {
+  /* 顶部柔和扫光：让引导区更像旧版欢迎大厅。 */
+  content: "";
+  position: absolute;
+  inset: auto -4rem -7rem auto;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(232, 201, 160, 0.08), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.eyebrow {
+  /* 眉标题沿用旧版细字距、大写风格。 */
+  margin-bottom: 0.45rem;
+  color: rgba(212, 165, 116, 0.68);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.hero-panel h1 {
+  /* 主标题尽量贴近旧版“深渊图书馆”视觉。 */
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1;
+  color: var(--amber-glow);
+  text-shadow: 0 0 32px var(--amber-faint);
+}
+
+.hero-copy {
+  /* 说明文案保持暖色，但亮度低于标题。 */
+  max-width: 44rem;
+  margin-top: 0.8rem;
+  color: rgba(212, 165, 116, 0.74);
+  line-height: 1.75;
+}
+
+/* ---- 导航标签 ---- */
+
+.hero-nav {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.hero-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(212, 165, 116, 0.2);
+  border-radius: 999px;
+  background: rgba(26, 26, 46, 0.5);
+  color: rgba(232, 201, 160, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.hero-nav a:hover {
+  background: var(--amber-faint);
+  border-color: var(--amber-soft);
+  box-shadow: 0 0 12px var(--amber-faint);
+  transform: translateY(-1px);
+}
+
+.hero-nav a[aria-current="page"] {
+  background: linear-gradient(135deg, var(--amber-soft), var(--amber-glow));
+  color: var(--abyss-deep);
+  border-color: transparent;
+}
+
+/* ---- 占位列（settings/upload 页面对齐网格用） ---- */
+
+.column-empty {
+  min-width: 0;
+}
+
+.column-home-hint {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: rgba(212, 165, 116, 0.52);
+}
+
+.notice-panel {
+  /* 通知卡使用旧版深紫底色和较克制的边框。 */
+  position: relative;
+  min-width: min(24rem, 100%);
+  max-width: 30rem;
+  padding: 1rem 1.2rem 1rem 1.35rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  background: rgba(13, 13, 26, 0.84);
+  box-shadow: var(--shadow-soft);
+  line-height: 1.68;
+}
+
+.notice-panel::before {
+  /* 左侧细高亮条用于表达当前通知语气。 */
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 0.95rem;
+  bottom: 0.95rem;
+  width: 2px;
+  border-radius: 999px;
+  background: rgba(212, 165, 116, 0.28);
+}
+
+.tone-neutral {
+  /* 默认态：旧版紫底 + 琥珀字。 */
+  border-color: rgba(212, 165, 116, 0.14);
+  color: rgba(232, 201, 160, 0.86);
+}
+
+.tone-working {
+  /* 工作态：仍旧是紫色主底，只增加一点琥珀热度。 */
+  border-color: rgba(212, 165, 116, 0.24);
+  background:
+    linear-gradient(180deg, rgba(40, 28, 20, 0.4), rgba(13, 13, 26, 0.9)),
+    rgba(13, 13, 26, 0.84);
+  color: rgba(232, 201, 160, 0.92);
+}
+
+.tone-success {
+  /* 成功态：仍然压在深紫底上，只叠一层低饱和绿色。 */
+  border-color: rgba(103, 150, 116, 0.3);
+  background:
+    linear-gradient(180deg, var(--notice-success), rgba(13, 13, 26, 0.9)),
+    rgba(13, 13, 26, 0.84);
+  color: rgba(222, 241, 226, 0.9);
+}
+
+.tone-failure {
+  /* 失败态：保持旧版深色氛围，只加入红棕警示。 */
+  border-color: rgba(175, 90, 81, 0.32);
+  background:
+    linear-gradient(180deg, var(--notice-failure), rgba(13, 13, 26, 0.92)),
+    rgba(13, 13, 26, 0.84);
+  color: rgba(246, 214, 206, 0.92);
+}
+
+/* =============================================================================
+   主工作区布局
+   ============================================================================= */
+
+.workspace-grid {
+  /* 三栏布局：左侧设置，中间资源目录，右侧预览。 */
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(18rem, 22rem) minmax(18rem, 26rem) minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+.column-stack {
+  /* 左侧两块面板上下排列。 */
+  display: grid;
+  gap: 1.25rem;
+  min-height: 0;
+}
+
+.panel {
+  /* 所有内容面板都统一成旧版深紫玻璃感。 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+  padding: 1.4rem;
+  border: 1px solid rgba(212, 165, 116, 0.14);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(26, 26, 46, 0.88) 0%, rgba(13, 13, 26, 0.92) 100%),
+    linear-gradient(145deg, rgba(100, 120, 160, 0.08), transparent 42%);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+.panel::before {
+  /* 面板顶边淡淡发亮，模拟旧版界面里的幽光。 */
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.28) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.panel-heading {
+  /* 面板标题区纵向排列。 */
+  display: grid;
+  gap: 0.3rem;
+}
+
+.panel-heading h2,
+.preview-header h3,
+.gallery-card h3 {
+  /* 面板标题、预览标题、卡片标题统一使用旧版显示字体。 */
+  font-family: var(--font-display);
+  color: var(--amber-glow);
+}
+
+.panel-heading p,
+.preview-header p,
+.gallery-card p,
+.gallery-meta,
+.preview-image-card figcaption {
+  /* 次级说明文案统一使用较低亮度的琥珀色。 */
+  color: rgba(212, 165, 116, 0.68);
+  line-height: 1.6;
+}
+
+/* =============================================================================
+   表单与输入区
+   ============================================================================= */
+
+.field {
+  /* 通用表单区：标签在上，控件在下。 */
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field span {
+  /* 表单标签比普通正文更亮一点，方便扫读。 */
+  color: rgba(232, 201, 160, 0.86);
+  font-size: 0.92rem;
+}
+
+.field input,
+.field textarea {
+  /* 输入框直接使用旧版导航输入框同系的深紫表面。 */
+  width: 100%;
+  padding: 0.82rem 0.95rem;
+  border: 1px solid rgba(212, 165, 116, 0.2);
+  border-radius: var(--radius-md);
+  background: rgba(26, 26, 46, 0.6);
+  color: var(--amber-glow);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  /* 占位符使用更淡的琥珀色。 */
+  color: rgba(212, 165, 116, 0.48);
+}
+
+.field textarea {
+  /* 私钥文本域允许竖向调整高度。 */
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  /* 焦点时恢复历史版本的琥珀描边和微光。 */
+  outline: none;
+  border-color: var(--amber-soft);
+  box-shadow: 0 0 0 2px var(--amber-faint);
+  transform: translateY(-1px);
+}
+
+.field input[type="file"] {
+  /* 文件选择器略微加大内边距，避免控件显得挤。 */
+  padding: 0.68rem 0.78rem;
+  cursor: pointer;
+}
+
+.field input[type="file"]::file-selector-button {
+  /* 文件按钮和历史版导航按钮保持同一种深紫 + 琥珀边框风格。 */
+  margin-right: 0.75rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(212, 165, 116, 0.22);
+  border-radius: 999px;
+  background: rgba(26, 26, 46, 0.8);
+  color: var(--amber-glow);
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.field input[type="file"]::file-selector-button:hover {
+  /* 文件按钮 hover 时给一点历史风格的淡琥珀光。 */
+  background: var(--amber-faint);
+  border-color: var(--amber-soft);
+  box-shadow: 0 0 12px var(--amber-faint);
+}
+
+.inline-field {
+  /* 资源根目录和后缀字段保留较紧凑的上下间距。 */
+  gap: 0.38rem;
+}
+
+.search-field input {
+  /* 搜索框比常规输入框更深一点，拉开层次。 */
+  background: rgba(18, 18, 36, 0.76);
+}
+
+/* =============================================================================
+   密钥摘要卡
+   ============================================================================= */
+
+.key-card {
+  /* 公钥摘要使用更深、更稳定的一块暗色铭牌。 */
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(212, 165, 116, 0.16);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(16, 20, 27, 0.96), rgba(32, 48, 65, 0.9));
+  color: #f6f1ea;
+}
+
+.key-label {
+  /* 小标题采用旧版大写题签风格。 */
+  color: rgba(246, 241, 234, 0.72);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.key-card code {
+  /* 长字符串允许断行。 */
+  overflow-wrap: anywhere;
+  font-size: 0.84rem;
+}
+
+/* =============================================================================
+   按钮体系
+   ============================================================================= */
+
+.button-row {
+  /* 设置区主按钮保持三列排列。 */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  /* 三类按钮共享胶囊外形与过渡效果。 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.primary-button:hover:not(:disabled),
+.secondary-button:hover:not(:disabled),
+.ghost-button:hover:not(:disabled) {
+  /* hover 时统一略微上浮。 */
+  transform: translateY(-1px);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.ghost-button:disabled {
+  /* 禁用态降低透明度并取消点击反馈。 */
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.primary-button {
+  /* 主按钮使用历史版最醒目的琥珀渐变。 */
+  background: linear-gradient(135deg, var(--amber-soft), var(--amber-glow));
+  color: var(--abyss-deep);
+  box-shadow: 0 12px 22px rgba(200, 145, 71, 0.2);
+}
+
+.secondary-button {
+  /* 次按钮回到旧版导航按钮风格。 */
+  background: rgba(26, 26, 46, 0.6);
+  color: var(--amber-soft);
+  border: 1px solid rgba(212, 165, 116, 0.25);
+}
+
+.secondary-button:hover:not(:disabled) {
+  /* 次按钮 hover 时增加暖色边框和光晕。 */
+  background: var(--amber-faint);
+  border-color: var(--amber-soft);
+  box-shadow: 0 0 12px var(--amber-faint);
+}
+
+.ghost-button {
+  /* 幽灵按钮仍然保持深紫透明底，只给细边框。 */
+  background: rgba(13, 13, 26, 0.28);
+  color: rgba(232, 201, 160, 0.88);
+  border: 1px solid rgba(212, 165, 116, 0.16);
+}
+
+.ghost-button:hover:not(:disabled) {
+  /* hover 时变亮一点即可，不抢主按钮。 */
+  background: rgba(212, 165, 116, 0.08);
+  border-color: rgba(212, 165, 116, 0.28);
+}
+
+.full-width {
+  /* 上传按钮独占整行。 */
+  width: 100%;
+}
+
+/* =============================================================================
+   上传摘要与本地缩略预览
+   ============================================================================= */
+
+.upload-selection {
+  /* 上传区摘要单独用一块内嵌卡片承载。 */
+  display: grid;
+  gap: 0.8rem;
+  padding: 0.95rem;
+  border: 1px solid rgba(212, 165, 116, 0.14);
+  border-radius: var(--radius-lg);
+  background: rgba(16, 16, 32, 0.46);
+}
+
+.upload-empty-panel {
+  /* 未选择文件时给出明确引导。 */
+  min-height: 8.5rem;
+  place-items: center;
+  text-align: center;
+}
+
+.upload-empty-panel p,
+.upload-selection-summary p,
+.upload-preview-more {
+  /* 上传区说明文案使用和其余辅助文本一致的色彩。 */
+  color: rgba(212, 165, 116, 0.72);
+  line-height: 1.6;
+}
+
+.upload-selection-summary {
+  /* 摘要文案上下排列。 */
+  display: grid;
+  gap: 0.28rem;
+}
+
+.upload-preview-grid {
+  /* 本地缩略图采用自适应网格。 */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.8rem, 1fr));
+  gap: 0.7rem;
+}
+
+.upload-preview-card {
+  /* 缩略图使用较紧凑的小卡片承载。 */
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.upload-preview-card img {
+  /* 缩略图保持方形裁切，便于快速核对顺序。 */
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(212, 165, 116, 0.14);
+  background: rgba(16, 20, 27, 0.24);
+}
+
+.upload-preview-card figcaption {
+  /* 文件名允许断行，方便核对顺序前缀前的原始名称。 */
+  font-size: 0.8rem;
+  color: rgba(212, 165, 116, 0.7);
+  overflow-wrap: anywhere;
+}
+
+/* =============================================================================
+   列表与预览区域
+   ============================================================================= */
+
+.library-panel,
+.preview-panel {
+  /* 主要内容区必须允许内部滚动。 */
+  min-height: 0;
+}
+
+.gallery-list,
+.preview-stack {
+  /* 两个滚动区都用统一的栈式布局和细滚动条。 */
+  display: grid;
+  gap: 0.9rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 0.15rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 165, 116, 0.34) transparent;
+}
+
+.gallery-list::-webkit-scrollbar,
+.preview-stack::-webkit-scrollbar {
+  /* WebKit 滚动条宽度。 */
+  width: 8px;
+}
+
+.gallery-list::-webkit-scrollbar-track,
+.preview-stack::-webkit-scrollbar-track {
+  /* 轨道保持透明。 */
+  background: transparent;
+}
+
+.gallery-list::-webkit-scrollbar-thumb,
+.preview-stack::-webkit-scrollbar-thumb {
+  /* 滑块使用半透明琥珀色。 */
+  border-radius: 999px;
+  background: rgba(212, 165, 116, 0.34);
+}
+
+.gallery-card {
+  /* 资源卡片回到旧版紫色卡片观感。 */
+  position: relative;
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid rgba(212, 165, 116, 0.12);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(26, 26, 46, 0.82) 0%, rgba(13, 13, 26, 0.88) 100%);
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.gallery-card::before {
+  /* 内层微光仅在 hover/选中时浮现。 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(100, 120, 160, 0.08), transparent 48%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+
+.gallery-card:hover,
+.gallery-card.selected {
+  /* hover 与选中时提升边框亮度和阴影。 */
+  transform: translateY(-2px);
+  border-color: rgba(212, 165, 116, 0.32);
+  box-shadow: 0 14px 28px rgba(10, 10, 20, 0.28);
+}
+
+.gallery-card:hover::before,
+.gallery-card.selected::before {
+  /* 激活态显示卡片内部冷色高光。 */
+  opacity: 1;
+}
+
+.gallery-card-top {
+  /* 标题与可用性徽章分列。 */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.gallery-card-top > div,
+.preview-header > div:first-child {
+  /* 允许长标题或路径在有限空间内正确收缩换行。 */
+  min-width: 0;
+}
+
+.gallery-card h3 {
+  /* 资源标题略大，保留旧版牌匾感。 */
+  font-size: 1.2rem;
+  word-break: break-word;
+}
+
+.gallery-card p,
+.preview-header p,
+.preview-image-card figcaption {
+  /* 路径和文件名允许断行。 */
+  overflow-wrap: anywhere;
+}
+
+.availability-pill {
+  /* 状态徽章沿用旧版琥珀细边框。 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 165, 116, 0.18);
+  background: rgba(212, 165, 116, 0.08);
+  color: rgba(232, 201, 160, 0.88);
+  white-space: nowrap;
+  font-size: 0.82rem;
+}
+
+.gallery-meta {
+  /* 元信息字号略小。 */
+  font-size: 0.92rem;
+}
+
+.empty-panel {
+  /* 空状态和加载状态都保持静默、克制的深紫容器。 */
+  display: grid;
+  place-items: center;
+  min-height: 16rem;
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(212, 165, 116, 0.18);
+  background: rgba(16, 16, 32, 0.42);
+  text-align: center;
+}
+
+.error-panel {
+  /* 错误面板保留深底，只叠一层暗红。 */
+  color: #f2c5bb;
+  background: linear-gradient(180deg, rgba(92, 34, 34, 0.28), rgba(16, 16, 32, 0.6));
+}
+
+.preview-stack {
+  /* 预览区垂直堆叠内容。 */
+  align-content: start;
+  padding-right: 0.2rem;
+}
+
+.preview-header {
+  /* 预览头部放标题、操作与状态。 */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.preview-actions {
+  /* 操作按钮保持横向排列，并允许折行。 */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.preview-image-card {
+  /* 每张预览图使用独立深紫卡片承载。 */
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(212, 165, 116, 0.12);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(21, 21, 40, 0.88) 0%, rgba(13, 13, 26, 0.9) 100%);
+}
+
+.preview-image-card img {
+  /* 图片本体带圆角、阴影和深色底衬。 */
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  background: rgba(16, 20, 27, 0.08);
+}
+
+.preview-image-card figcaption {
+  /* 图注保持较淡文字色。 */
+  font-size: 0.92rem;
+}
+
+/* =============================================================================
+   动画
+   ============================================================================= */
+
+@keyframes parallax-drift {
+  /* 书架背景缓慢横移。 */
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(60px);
+  }
+}
+
+@keyframes mist-drift {
+  /* 迷雾层缓慢漂浮。 */
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(40px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-30px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes candle-flicker {
+  /* 烛光亮度和大小轻微变化。 */
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.96);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+/* =============================================================================
+   响应式
+   ============================================================================= */
+
+@media (max-width: 1280px) {
+  /* 中等屏幕先压成两列，让预览区独占一行。 */
+  .workspace-grid {
+    grid-template-columns: minmax(18rem, 22rem) minmax(0, 1fr);
+  }
+
+  .preview-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 980px) {
+  /* 平板及更小设备改为整页滚动，避免固定高度挤压。 */
+  html,
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  #root {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .client-shell {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .hero-panel {
+    flex-direction: column;
+  }
+
+  .workspace-grid {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .preview-panel {
+    grid-column: auto;
+  }
+
+  .gallery-list,
+  .preview-stack {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  /* 手机端收紧留白并让按钮改为纵向。 */
+  .client-shell {
+    padding: 1rem;
+  }
+
+  .hero-panel,
+  .panel {
+    padding: 1.15rem;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-header,
+  .gallery-card-top {
+    flex-direction: column;
+  }
+
+  .notice-panel {
+    min-width: 100%;
+    max-width: none;
+  }
+
+  .preview-actions {
+    width: 100%;
+  }
+
+  .preview-actions .ghost-button {
+    width: 100%;
+  }
+}
+
+/* =============================================================================
+   PWA / 独立显示模式
+   ============================================================================= */
+
+@media (display-mode: standalone) {
+  /* 独立模式预留安全区。 */
+  .client-shell {
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+}
