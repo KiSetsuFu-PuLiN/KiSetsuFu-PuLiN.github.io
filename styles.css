@@ -1,5 +1,5 @@
 /* =============================================================================
-   深渊图书馆 · Library of Abyss
+   幻想图书馆 · Library of Fantasia
    适配当前 client 三栏界面的旧版紫色主题
    基础配色直接回用历史 styles.css 中的靛蓝 / 虚空 / 琥珀体系
    ============================================================================= */
@@ -8,11 +8,11 @@
   /* CSS 自定义属性（变量）：集中管理旧版主题中的颜色、字体、阴影与圆角。 */
 
   /* 主色：直接沿用历史版本的紫色靛蓝体系。 */
-  --abyss-deep: #0a0a14; /* 最深背景色，作为页面整体底色。 */
-  --abyss-void: #0d0d1a; /* 虚空色，用于面板和背景渐变的深处。 */
-  --abyss-indigo: #1a1a2e; /* 历史版本的主靛蓝色，也是用户提到的偏紫底色。 */
-  --abyss-midnight: #16213e; /* 午夜蓝，用于局部高光和次级背景。 */
-  --abyss-navy: #0f3460; /* 更亮的深蓝，用于层次与边缘提亮。 */
+  --theme-deep: #0a0a14; /* 最深背景色，作为页面整体底色。 */
+  --theme-void: #0d0d1a; /* 虚空色，用于面板和背景渐变的深处。 */
+  --theme-indigo: #1a1a2e; /* 历史版本的主靛蓝色，也是用户提到的偏紫底色。 */
+  --theme-midnight: #16213e; /* 午夜蓝，用于局部高光和次级背景。 */
+  --theme-navy: #0f3460; /* 更亮的深蓝，用于层次与边缘提亮。 */
 
   /* 暖色：继续使用旧版的琥珀烛光，和紫色背景形成对比。 */
   --amber-soft: #d4a574; /* 常规文字与强调色。 */
@@ -54,7 +54,7 @@ body {
   height: 100%;
   min-height: 100vh;
   overflow: hidden; /* 桌面端滚动交给内部面板。 */
-  background: var(--abyss-deep);
+  background: var(--theme-deep);
   color: var(--amber-soft);
   font-family: var(--font-ui);
   font-size: 16px;
@@ -79,9 +79,9 @@ body::before {
     linear-gradient(
       180deg,
       transparent 0%,
-      var(--abyss-indigo) 30%,
-      var(--abyss-void) 72%,
-      var(--abyss-deep) 100%
+      var(--theme-indigo) 30%,
+      var(--theme-void) 72%,
+      var(--theme-deep) 100%
     ),
     repeating-linear-gradient(
       90deg,
@@ -262,7 +262,7 @@ img {
 }
 
 .hero-panel h1 {
-  /* 主标题尽量贴近旧版“深渊图书馆”视觉。 */
+  /* 主标题尽量贴近旧版“幻想图书馆”视觉。 */
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 3.8rem);
   line-height: 1;
@@ -309,7 +309,7 @@ img {
 
 .hero-nav a[aria-current="page"] {
   background: linear-gradient(135deg, var(--amber-soft), var(--amber-glow));
-  color: var(--abyss-deep);
+  color: var(--theme-deep);
   border-color: transparent;
 }
 
@@ -616,7 +616,7 @@ img {
 .primary-button {
   /* 主按钮使用历史版最醒目的琥珀渐变。 */
   background: linear-gradient(135deg, var(--amber-soft), var(--amber-glow));
-  color: var(--abyss-deep);
+  color: var(--theme-deep);
   box-shadow: 0 12px 22px rgba(200, 145, 71, 0.2);
 }
 
