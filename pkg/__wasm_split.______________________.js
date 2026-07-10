@@ -1,0 +1,89 @@
+import { initSync } from "./library-of-fantasia-client.js";
+let sharedImports = undefined;
+function getSharedImports() {
+    if (sharedImports === undefined) {
+        sharedImports = { __wasm_split: {  } };
+        const mainExports = initSync(undefined, undefined);
+        const { memory, __wasm_split_shared1, __indirect_function_table,  } = mainExports;
+        Object.assign(sharedImports.__wasm_split, { memory, __wasm_split_shared1, __indirect_function_table,  });
+    }
+    return sharedImports;
+}
+function wrapAsyncCb(callee) {
+    return async (callbackIndex, callbackData) => {
+        let success;
+        try {
+            await callee();
+            success = true;
+        } catch (e) {
+            console.error(e);
+            success = false;
+        } finally {
+            const sharedImports = getSharedImports();
+            sharedImports.__wasm_split.__indirect_function_table.get(callbackIndex)(callbackData, success);
+        }
+    }
+}
+function makeLoad(fetchOpts, deps) {
+    const fetcher = makeFetch(fetchOpts);
+    const loader = async () => {
+        const parallelStuff = deps.map(d => d());
+        const instantiate = fetcher();
+        await Promise.all(parallelStuff);
+        const imports = getSharedImports();
+        return instantiate(imports);
+    };
+    let loadingModule = undefined;
+    return () => {
+        if (loadingModule === undefined) {
+            const thisLoad = loader();
+            // Memoize successes only: a rejected load must not be cached for
+            // the lifetime of the session, or one transient network failure
+            // permanently breaks the module. Clearing on rejection lets the
+            // next call (e.g. the Rust side re-invoking load after a failed
+            // callback) start a fresh attempt.
+            thisLoad.catch(() => {
+                if (loadingModule === thisLoad) loadingModule = undefined;
+            });
+            loadingModule = thisLoad;
+        }
+        return loadingModule;
+    }
+}
+function makeFetch(srcUrl) {
+    if (srcUrl === undefined) {
+        return () => { return async (_imports) => { return {} } };
+    }
+    return () => {
+        const src = fetch(srcUrl);
+        return async (imports) => {
+            return await WebAssembly.instantiateStreaming(src, imports);
+        }
+    }
+}
+/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642 */
+const __chunk_5 = makeLoad(new URL("./chunk_5.wasm", import.meta.url), []);
+/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326 */
+const __chunk_6 = makeLoad(new URL("./chunk_6.wasm", import.meta.url), []);
+/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+const __chunk_7 = makeLoad(new URL("./chunk_7.wasm", import.meta.url), []);
+/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642, __upload_route_view_15683008554512348049 */
+const __chunk_8 = makeLoad(new URL("./chunk_8.wasm", import.meta.url), []);
+/* __library_route_view_10688581337836973876, __settings_route_view_16136774833800460326 */
+const __chunk_9 = makeLoad(new URL("./chunk_9.wasm", import.meta.url), []);
+/* __library_route_view_10688581337836973876, __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+const __chunk_10 = makeLoad(new URL("./chunk_10.wasm", import.meta.url), []);
+/* __library_route_view_10688581337836973876, __upload_route_view_15683008554512348049 */
+const __chunk_11 = makeLoad(new URL("./chunk_11.wasm", import.meta.url), []);
+/* __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326 */
+const __chunk_12 = makeLoad(new URL("./chunk_12.wasm", import.meta.url), []);
+/* __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+const __chunk_13 = makeLoad(new URL("./chunk_13.wasm", import.meta.url), []);
+/* __preview_route_view_3526295267285101642, __upload_route_view_15683008554512348049 */
+const __chunk_14 = makeLoad(new URL("./chunk_14.wasm", import.meta.url), []);
+/* __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+const __chunk_15 = makeLoad(new URL("./chunk_15.wasm", import.meta.url), []);
+export const __wasm_split_load___upload_route_view_15683008554512348049 = wrapAsyncCb(makeLoad(new URL("./split___upload_route_view_15683008554512348049.wasm", import.meta.url), [__chunk_7, __chunk_8, __chunk_10, __chunk_11, __chunk_13, __chunk_14, __chunk_15]));
+export const __wasm_split_load___settings_route_view_16136774833800460326 = wrapAsyncCb(makeLoad(new URL("./split___settings_route_view_16136774833800460326.wasm", import.meta.url), [__chunk_6, __chunk_7, __chunk_9, __chunk_10, __chunk_12, __chunk_13, __chunk_15]));
+export const __wasm_split_load___preview_route_view_3526295267285101642 = wrapAsyncCb(makeLoad(new URL("./split___preview_route_view_3526295267285101642.wasm", import.meta.url), [__chunk_5, __chunk_6, __chunk_7, __chunk_8, __chunk_12, __chunk_13, __chunk_14]));
+export const __wasm_split_load___library_route_view_10688581337836973876 = wrapAsyncCb(makeLoad(new URL("./split___library_route_view_10688581337836973876.wasm", import.meta.url), [__chunk_5, __chunk_6, __chunk_7, __chunk_8, __chunk_9, __chunk_10, __chunk_11]));
