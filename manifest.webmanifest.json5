@@ -3,6 +3,7 @@
   Web App Manifest 定义了 PWA 的元数据，如名称、图标、启动 URL 等
   允许应用安装到设备主屏幕，像原生应用一样运行
 */
+//todo: server worker 缓存
 {
   // 应用全名
   "name": "幻想图书馆 · Library of Fantasia",

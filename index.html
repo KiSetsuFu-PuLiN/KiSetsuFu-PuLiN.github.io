@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta name="theme-color" content="#10141b" />
-        <meta name="description" content="Library of Fantasia 客户端：archive 同步、本地缓存、画集上传与预览。" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-        <link rel="manifest" href="/manifest.webmanifest.json5" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
-        <link rel="stylesheet" href="/index.css" />
-        <title>Library of Fantasia Client</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#10141b" />
+    <meta name="description" content="Library of Fantasia 客户端：archive 同步、本地缓存、画集上传与预览。" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-        <script>
-            window.addEventListener("error", function (event) {
-                var root = document.getElementById("root");
-                if (root && !root.textContent.trim()) {
-                    root.innerHTML =
-                        "<main class=\"fatal-shell\">"
-                        + "<h1>client 初始化失败</h1>"
-                        + "<p>" + (event.message || event.error || "未知脚本错误") + "</p>"
-                        + "</main>";
-                }
-            });
-            window.addEventListener("unhandledrejection", function (event) {
-                var root = document.getElementById("root");
-                if (root && !root.textContent.trim()) {
-                    root.innerHTML =
-                        "<main class=\"fatal-shell\">"
-                        + "<h1>client 初始化失败</h1>"
-                        + "<p>" + (event.reason && event.reason.message || event.reason || "未知异步错误") + "</p>"
-                        + "</main>";
-                }
-            });
-        </script>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script type="module">import init,{hydrate} from '/pkg/library-of-fantasia-client.js';await init({module_or_path:'/pkg/library-of-fantasia-client.wasm'});hydrate();</script>
-    </body>
+    <link rel="manifest" href="/manifest.webmanifest.json5" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <link rel="stylesheet" href="/index.css" />
+    <title>Library of Fantasia Client</title>
+
+    <script>
+        window.addEventListener("error", function (event) {
+            var root = document.getElementById("root");
+            if (root && !root.textContent.trim()) {
+                root.innerHTML =
+                    "<main class=\"fatal-shell\">"
+                    + "<h1>client 初始化失败</h1>"
+                    + "<p>" + (event.message || event.error || "未知脚本错误") + "</p>"
+                    + "</main>";
+            }
+        });
+        window.addEventListener("unhandledrejection", function (event) {
+            var root = document.getElementById("root");
+            if (root && !root.textContent.trim()) {
+                root.innerHTML =
+                    "<main class=\"fatal-shell\">"
+                    + "<h1>client 初始化失败</h1>"
+                    + "<p>" + (event.reason && event.reason.message || event.reason || "未知异步错误") + "</p>"
+                    + "</main>";
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="module">
+        import init, { hydrate } from '/wasm/library-of-fantasia-client.js';
+        await init({ module_or_path: '/wasm/library-of-fantasia-client.wasm' });
+        hydrate();
+    </script>
+</body>
+
 </html>
