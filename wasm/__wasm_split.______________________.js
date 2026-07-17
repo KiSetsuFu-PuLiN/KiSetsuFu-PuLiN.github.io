@@ -4,8 +4,8 @@ function getSharedImports() {
     if (sharedImports === undefined) {
         sharedImports = { __wasm_split: {  } };
         const mainExports = initSync(undefined, undefined);
-        const { __wasm_split_shared0, __indirect_function_table, memory,  } = mainExports;
-        Object.assign(sharedImports.__wasm_split, { __wasm_split_shared0, __indirect_function_table, memory,  });
+        const { memory, __wasm_split_shared1, __indirect_function_table,  } = mainExports;
+        Object.assign(sharedImports.__wasm_split, { memory, __wasm_split_shared1, __indirect_function_table,  });
     }
     return sharedImports;
 }
@@ -61,29 +61,27 @@ function makeFetch(srcUrl) {
         }
     }
 }
-/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642 */
+/* __library_route_view_10688581337836973876, __preview_route_view_5960855456910630016 */
 const __chunk_5 = makeLoad(new URL("./chunk_5.wasm", import.meta.url), []);
-/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326 */
+/* __library_route_view_10688581337836973876, __preview_route_view_5960855456910630016, __settings_route_view_16136774833800460326 */
 const __chunk_6 = makeLoad(new URL("./chunk_6.wasm", import.meta.url), []);
-/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+/* __library_route_view_10688581337836973876, __preview_route_view_5960855456910630016, __settings_route_view_16136774833800460326, __upload_route_view_9816873168227179920 */
 const __chunk_7 = makeLoad(new URL("./chunk_7.wasm", import.meta.url), []);
-/* __library_route_view_10688581337836973876, __preview_route_view_3526295267285101642, __upload_route_view_15683008554512348049 */
+/* __library_route_view_10688581337836973876, __preview_route_view_5960855456910630016, __upload_route_view_9816873168227179920 */
 const __chunk_8 = makeLoad(new URL("./chunk_8.wasm", import.meta.url), []);
 /* __library_route_view_10688581337836973876, __settings_route_view_16136774833800460326 */
 const __chunk_9 = makeLoad(new URL("./chunk_9.wasm", import.meta.url), []);
-/* __library_route_view_10688581337836973876, __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+/* __library_route_view_10688581337836973876, __settings_route_view_16136774833800460326, __upload_route_view_9816873168227179920 */
 const __chunk_10 = makeLoad(new URL("./chunk_10.wasm", import.meta.url), []);
-/* __library_route_view_10688581337836973876, __upload_route_view_15683008554512348049 */
+/* __library_route_view_10688581337836973876, __upload_route_view_9816873168227179920 */
 const __chunk_11 = makeLoad(new URL("./chunk_11.wasm", import.meta.url), []);
-/* __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326 */
+/* __preview_route_view_5960855456910630016, __settings_route_view_16136774833800460326 */
 const __chunk_12 = makeLoad(new URL("./chunk_12.wasm", import.meta.url), []);
-/* __preview_route_view_3526295267285101642, __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
+/* __preview_route_view_5960855456910630016, __upload_route_view_9816873168227179920 */
 const __chunk_13 = makeLoad(new URL("./chunk_13.wasm", import.meta.url), []);
-/* __preview_route_view_3526295267285101642, __upload_route_view_15683008554512348049 */
+/* __settings_route_view_16136774833800460326, __upload_route_view_9816873168227179920 */
 const __chunk_14 = makeLoad(new URL("./chunk_14.wasm", import.meta.url), []);
-/* __settings_route_view_16136774833800460326, __upload_route_view_15683008554512348049 */
-const __chunk_15 = makeLoad(new URL("./chunk_15.wasm", import.meta.url), []);
-export const __wasm_split_load___upload_route_view_15683008554512348049 = wrapAsyncCb(makeLoad(new URL("./split___upload_route_view_15683008554512348049.wasm", import.meta.url), [__chunk_7, __chunk_8, __chunk_10, __chunk_11, __chunk_13, __chunk_14, __chunk_15]));
-export const __wasm_split_load___settings_route_view_16136774833800460326 = wrapAsyncCb(makeLoad(new URL("./split___settings_route_view_16136774833800460326.wasm", import.meta.url), [__chunk_6, __chunk_7, __chunk_9, __chunk_10, __chunk_12, __chunk_13, __chunk_15]));
-export const __wasm_split_load___preview_route_view_3526295267285101642 = wrapAsyncCb(makeLoad(new URL("./split___preview_route_view_3526295267285101642.wasm", import.meta.url), [__chunk_5, __chunk_6, __chunk_7, __chunk_8, __chunk_12, __chunk_13, __chunk_14]));
+export const __wasm_split_load___upload_route_view_9816873168227179920 = wrapAsyncCb(makeLoad(new URL("./split___upload_route_view_9816873168227179920.wasm", import.meta.url), [__chunk_7, __chunk_8, __chunk_10, __chunk_11, __chunk_13, __chunk_14]));
+export const __wasm_split_load___settings_route_view_16136774833800460326 = wrapAsyncCb(makeLoad(new URL("./split___settings_route_view_16136774833800460326.wasm", import.meta.url), [__chunk_6, __chunk_7, __chunk_9, __chunk_10, __chunk_12, __chunk_14]));
+export const __wasm_split_load___preview_route_view_5960855456910630016 = wrapAsyncCb(makeLoad(new URL("./split___preview_route_view_5960855456910630016.wasm", import.meta.url), [__chunk_5, __chunk_6, __chunk_7, __chunk_8, __chunk_12, __chunk_13]));
 export const __wasm_split_load___library_route_view_10688581337836973876 = wrapAsyncCb(makeLoad(new URL("./split___library_route_view_10688581337836973876.wasm", import.meta.url), [__chunk_5, __chunk_6, __chunk_7, __chunk_8, __chunk_9, __chunk_10, __chunk_11]));
