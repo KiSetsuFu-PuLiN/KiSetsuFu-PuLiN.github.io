@@ -46,7 +46,14 @@
   --font: "fusion-pixel-12-monospaced", monospace;
 }
 
-/* === Reset === */
+#root {
+  /* 占满全屏 */
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* 竖向列表 */
+  display: flex;
+  flex-direction: column;
+}
 
 *,
 *::before,
@@ -108,65 +115,6 @@ nav a:hover {
   color: var(--color-content-2);
 }
 
-/* === Layout === */
-
-.display-flex {
-  display: flex;
-}
-.display-inline-flex {
-  display: inline-flex;
-}
-.display-grid {
-  display: grid;
-}
-.display-block {
-  display: block;
-}
-.flex-column {
-  flex-direction: column;
-}
-.flex-wrap {
-  flex-wrap: wrap;
-}
-.flex-1 {
-  flex: 1;
-}
-.grid-columns-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* === Alignment === */
-
-.align-items-start {
-  align-items: flex-start;
-}
-.align-items-center {
-  align-items: center;
-}
-.justify-content-center {
-  justify-content: center;
-}
-.justify-content-between {
-  justify-content: space-between;
-}
-.text-align-center {
-  text-align: center;
-}
-.text-align-left {
-  text-align: left;
-}
-
-/* === Sizing === */
-
-.width-full {
-  width: 100%;
-}
-.min-height-screen {
-  min-height: 100vh;
-}
-
-/* === Padding === */
-
 .padding-0 {
   padding: 0;
 }
@@ -198,8 +146,6 @@ nav a:hover {
   padding-bottom: 4px;
 }
 
-/* === Margin === */
-
 .margin-top-0 {
   margin-top: 0;
 }
@@ -209,8 +155,6 @@ nav a:hover {
 .margin-bottom-1 {
   margin-bottom: 4px;
 }
-
-/* === Gap === */
 
 .gap-0 {
   gap: 0;
@@ -225,8 +169,6 @@ nav a:hover {
   gap: 16px;
 }
 
-/* === Background Colors === */
-
 .background-0 {
   background: var(--color-background-0);
 }
@@ -236,17 +178,12 @@ nav a:hover {
 .background-2 {
   background: var(--color-background-2);
 }
-.background-transparent {
-  background: transparent;
-}
 .background-accent {
   background: var(--color-accent-0);
 }
 .background-accent-1 {
   background: var(--color-accent-1);
 }
-
-/* === Text Colors === */
 
 .color-0 {
   color: var(--color-content-0);
@@ -267,8 +204,6 @@ nav a:hover {
   color: #ff4a4a;
 }
 
-/* === Border Colors === */
-
 .border-color-accent {
   border-color: var(--color-accent-1);
 }
@@ -276,13 +211,8 @@ nav a:hover {
   border-color: transparent;
 }
 
-/* === Borders === */
-
 .border {
   border: 1px solid var(--color-border);
-}
-.border-none {
-  border: none;
 }
 .border-top {
   border-top: 1px solid var(--color-border);
@@ -291,16 +221,9 @@ nav a:hover {
   border-bottom: 1px solid var(--color-border);
 }
 
-/* === Border Radius === */
-
-.border-radius-none {
-  border-radius: var(--radius-0);
-}
 .border-radius {
   border-radius: var(--radius-1);
 }
-
-/* === Font Size === */
 
 .text-size-1 {
   font-size: 0.6rem;
@@ -324,35 +247,6 @@ nav a:hover {
   font-size: 1.25rem;
 }
 
-/* === Miscellaneous === */
-
-.overflow-hidden {
-  overflow: hidden;
-}
-.cursor-pointer {
-  cursor: pointer;
-}
-.white-space-nowrap {
-  white-space: nowrap;
-}
-.text-overflow-ellipsis {
-  text-overflow: ellipsis;
-}
-.object-fit-cover {
-  object-fit: cover;
-}
-.aspect-ratio-square {
-  aspect-ratio: 1;
-}
-.word-break-all {
-  word-break: break-all;
-}
-.opacity-forty {
-  opacity: 0.4;
-}
-
-/* === Interactive States === */
-
 .hover-background-2:hover {
   background: var(--color-background-2);
 }
@@ -362,3 +256,4 @@ nav a:hover {
 .hover-brightness:hover {
   filter: brightness(1.15);
 }
+
