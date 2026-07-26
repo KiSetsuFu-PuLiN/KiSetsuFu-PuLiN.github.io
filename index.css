@@ -46,15 +46,6 @@
   --font: "fusion-pixel-12-monospaced", monospace;
 }
 
-#root {
-  /* 占满全屏 */
-  min-height: 100vh;
-  min-height: 100dvh;
-  /* 竖向列表 */
-  display: flex;
-  flex-direction: column;
-}
-
 *,
 *::before,
 *::after {
@@ -72,6 +63,12 @@ body {
   color: var(--color-content-0);
   background: var(--color-background-0);
   line-height: 1.4;
+  /* 占满全屏 */
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* 竖向列表 */
+  display: flex;
+  flex-direction: column;
 }
 
 a {

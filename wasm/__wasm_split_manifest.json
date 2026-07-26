@@ -1,14 +1,4 @@
 {
-  "__settings_route_view_16136774833800460326": [
-    "chunk_6",
-    "chunk_7",
-    "chunk_9",
-    "chunk_10",
-    "chunk_12",
-    "chunk_13",
-    "chunk_15",
-    "split___settings_route_view_16136774833800460326"
-  ],
   "__library_route_view_8439578658861477294": [
     "chunk_5",
     "chunk_6",
@@ -18,6 +8,16 @@
     "chunk_10",
     "chunk_11",
     "split___library_route_view_8439578658861477294"
+  ],
+  "__settings_route_view_16136774833800460326": [
+    "chunk_6",
+    "chunk_7",
+    "chunk_9",
+    "chunk_10",
+    "chunk_12",
+    "chunk_13",
+    "chunk_15",
+    "split___settings_route_view_16136774833800460326"
   ],
   "__preview_route_view_3526295267285101642": [
     "chunk_5",

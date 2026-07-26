@@ -38,13 +38,14 @@ export class IntoUnderlyingSource {
 
 /**
  * cargo-leptos CSR 入口：由生成的 JS glue 在 WASM 加载后调用。
+ * 调用详见 `web-asset/.index.html`
  */
 export function hydrate(): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
-    readonly __wasm_split_00parse_list_entries_495699008166880339400_export_c4ea92120dd89767e1a334504f7888df_parse_list_entries: (a: number, b: number, c: number) => void;
+    readonly __wasm_split_00parse_list_entries_495699008166880339400_export_177280b6152afd07fb6d8bb6aa002c85_parse_list_entries: (a: number, b: number, c: number) => void;
     readonly hydrate: () => void;
     readonly __wbg_intounderlyingbytesource_free: (a: number, b: number) => void;
     readonly __wbg_intounderlyingsink_free: (a: number, b: number) => void;
@@ -61,11 +62,11 @@ export interface InitOutput {
     readonly intounderlyingsource_pull: (a: number, b: number) => number;
     readonly memory: WebAssembly.Memory;
     readonly __indirect_function_table: WebAssembly.Table;
-    readonly __wasm_bindgen_func_elem_7051: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_7860: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_10503: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_10503_2: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_10755: (a: number, b: number) => void;
+    readonly __wasm_bindgen_func_elem_10591: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_6680: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_12320: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_12320_2: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_3770: (a: number, b: number) => void;
     readonly __wbindgen_export: (a: number, b: number) => number;
     readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
     readonly __wbindgen_export3: (a: number) => void;
