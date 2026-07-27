@@ -35,12 +35,7 @@
       // 图标类型
       "type": "image/svg+xml",
       // 图标用途
-      "purpose": [
-        // 通用用途
-        "any",
-        // 可裁剪用途，当所需的图标会被操作系统裁剪时，也会使用这个图标
-        "maskable"
-      ]
+      "purpose": "any maskable"
     }
   ],
   // 应用类别

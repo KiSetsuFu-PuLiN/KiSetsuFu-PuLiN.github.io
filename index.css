@@ -1,26 +1,32 @@
 @font-face {
   font-family: "fusion-pixel-8-monospaced";
   src: url("fonts/fusion-pixel-8px-monospaced.woff2") format("woff2");
+  font-display: swap;
 }
 @font-face {
   font-family: "fusion-pixel-8-proportional";
   src: url("fonts/fusion-pixel-8px-proportional.woff2") format("woff2");
+  font-display: swap;
 }
 @font-face {
   font-family: "fusion-pixel-10-monospaced";
   src: url("fonts/fusion-pixel-10px-monospaced.woff2") format("woff2");
+  font-display: swap;
 }
 @font-face {
   font-family: "fusion-pixel-10-proportional";
   src: url("fonts/fusion-pixel-10px-proportional.woff2") format("woff2");
+  font-display: swap;
 }
 @font-face {
   font-family: "fusion-pixel-12-monospaced";
   src: url("fonts/fusion-pixel-12px-monospaced.woff2") format("woff2");
+  font-display: swap;
 }
 @font-face {
   font-family: "fusion-pixel-12-proportional";
   src: url("fonts/fusion-pixel-12px-proportional.woff2") format("woff2");
+  font-display: swap;
 }
 
 :root {
@@ -56,6 +62,7 @@
 
 html {
   font-size: 24px;
+  height: 100%;
 }
 
 body {
@@ -63,10 +70,11 @@ body {
   color: var(--color-content-0);
   background: var(--color-background-0);
   line-height: 1.4;
-  /* 占满全屏 */
-  min-height: 100vh;
-  min-height: 100dvh;
-  /* 竖向列表 */
+  /* 铺满视口；内容超出时由内部 overflow:auto 区域出滑条 */
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
