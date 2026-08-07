@@ -3,17 +3,18 @@
   Web App Manifest 定义了 PWA 的元数据，如名称、图标、启动 URL 等
   允许应用安装到设备主屏幕，像原生应用一样运行
 */
-//todo: server worker 缓存
 {
+  // JSON Schema，用于配置验证和编辑器支持。
+  "$schema": "https://json.schemastore.org/web-manifest.json",
   // 应用全名
-  "name": "幻想图书馆 · Library of Fantasia",
+  "name": "Library of Fantasia",
   // 应用短名（用于主屏幕）
-  "short_name": "幻想图书馆",
+  "short_name": "Lof",
   // 应用描述
-  "description": "隐秘的数字庇护所",
+  "description": "幻想图书馆",
   // 启动 URL
   "start_url": "/",
-  // 显示模式：独立应用（无浏览器 UI）
+  // 显示模式：独立应用/无浏览器 UI
   "display": "standalone",
   // 首选方向：纵向
   "orientation": "portrait-primary",

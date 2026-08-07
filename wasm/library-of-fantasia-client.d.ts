@@ -45,7 +45,6 @@ export function hydrate(): void;
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
-    readonly __wasm_split_00parse_list_entries_495699008166880339400_export_55383bd01df5bd6371c6db9c6579695c_parse_list_entries: (a: number, b: number, c: number) => void;
     readonly hydrate: () => void;
     readonly __wbg_intounderlyingbytesource_free: (a: number, b: number) => void;
     readonly __wbg_intounderlyingsink_free: (a: number, b: number) => void;
@@ -62,11 +61,11 @@ export interface InitOutput {
     readonly intounderlyingsource_pull: (a: number, b: number) => number;
     readonly __indirect_function_table: WebAssembly.Table;
     readonly memory: WebAssembly.Memory;
-    readonly __wasm_bindgen_func_elem_9853: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_1747: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_4323: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_4323_2: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_1834: (a: number, b: number) => void;
+    readonly __wasm_bindgen_func_elem_11791: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_9467: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_10567: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_10567_2: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_5996: (a: number, b: number) => void;
     readonly __wbindgen_export: (a: number, b: number) => number;
     readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
     readonly __wbindgen_export3: (a: number) => void;
