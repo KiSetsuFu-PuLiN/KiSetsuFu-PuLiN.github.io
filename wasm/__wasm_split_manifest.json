@@ -1,23 +1,4 @@
 {
-  "__preview_route_view_2848407420193843343": [
-    "chunk_6",
-    "chunk_7",
-    "chunk_8",
-    "chunk_9",
-    "chunk_10",
-    "chunk_11",
-    "chunk_16",
-    "chunk_17",
-    "chunk_18",
-    "split___preview_route_view_2848407420193843343"
-  ],
-  "__settings_route_view_11962942814232643498": [
-    "chunk_7",
-    "chunk_8",
-    "chunk_12",
-    "chunk_19",
-    "split___settings_route_view_11962942814232643498"
-  ],
   "__upload_route_view_15295607617862539157": [
     "chunk_7",
     "chunk_8",
@@ -30,6 +11,18 @@
     "chunk_18",
     "chunk_19",
     "split___upload_route_view_15295607617862539157"
+  ],
+  "__preview_route_view_2848407420193843343": [
+    "chunk_6",
+    "chunk_7",
+    "chunk_8",
+    "chunk_9",
+    "chunk_10",
+    "chunk_11",
+    "chunk_16",
+    "chunk_17",
+    "chunk_18",
+    "split___preview_route_view_2848407420193843343"
   ],
   "__library_route_view_259358825227448149": [
     "chunk_6",
@@ -53,5 +46,12 @@
     "chunk_16",
     "chunk_17",
     "split___synth_route_view_13336774268742653863"
+  ],
+  "__settings_route_view_11962942814232643498": [
+    "chunk_7",
+    "chunk_8",
+    "chunk_12",
+    "chunk_19",
+    "split___settings_route_view_11962942814232643498"
   ]
 }

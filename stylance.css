@@ -998,6 +998,23 @@
   right: 0;
 }
 
+/* 参数滑块 */
+
+.param-12fe3a7 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 4px;
+  font-size: 0.55rem;
+  color: var(--color-content-1);
+}
+
+.param-12fe3a7 input[type="range"] {
+  width: 60px;
+  height: 10px;
+  accent-color: var(--color-accent);
+}
+
 
 /* SynthView 合成器主视图 */
 
