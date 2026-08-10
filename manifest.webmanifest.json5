@@ -9,7 +9,7 @@
   // 应用全名
   "name": "Library of Fantasia",
   // 应用短名（用于主屏幕）
-  "short_name": "Lof",
+  "short_name": "LoF",
   // 应用描述
   "description": "幻想图书馆",
   // 启动 URL
