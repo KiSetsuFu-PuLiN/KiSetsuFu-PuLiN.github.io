@@ -3,31 +3,26 @@
   src: url("fonts/fusion-pixel-8px-monospaced.woff2") format("woff2");
   font-display: swap;
 }
-
 @font-face {
   font-family: "fusion-pixel-8-proportional";
   src: url("fonts/fusion-pixel-8px-proportional.woff2") format("woff2");
   font-display: swap;
 }
-
 @font-face {
   font-family: "fusion-pixel-10-monospaced";
   src: url("fonts/fusion-pixel-10px-monospaced.woff2") format("woff2");
   font-display: swap;
 }
-
 @font-face {
   font-family: "fusion-pixel-10-proportional";
   src: url("fonts/fusion-pixel-10px-proportional.woff2") format("woff2");
   font-display: swap;
 }
-
 @font-face {
   font-family: "fusion-pixel-12-monospaced";
   src: url("fonts/fusion-pixel-12px-monospaced.woff2") format("woff2");
   font-display: swap;
 }
-
 @font-face {
   font-family: "fusion-pixel-12-proportional";
   src: url("fonts/fusion-pixel-12px-proportional.woff2") format("woff2");
@@ -91,8 +86,6 @@ body {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  /* 避开 PWA 全屏模式下的刘海、圆角与底部手势区域。 */
-  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
 }
 
 a {

@@ -15,7 +15,7 @@
   // 启动 URL
   "start_url": "/",
   // 显示模式：独立应用/无浏览器 UI
-  "display": "standalone",
+  "display": "fullscreen",
   // 首选方向：纵向
   "orientation": "portrait-primary",
   // 启动时的背景色

@@ -170,11 +170,11 @@ export interface InitOutput {
     readonly intounderlyingsource_pull: (a: number, b: number) => number;
     readonly __indirect_function_table: WebAssembly.Table;
     readonly memory: WebAssembly.Memory;
-    readonly __wasm_bindgen_func_elem_2812: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_2666: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_1022: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_1022_2: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_2419: (a: number, b: number) => void;
+    readonly __wasm_bindgen_func_elem_1341: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_4472: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_1990: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_1990_2: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_4294: (a: number, b: number) => void;
     readonly __wbindgen_export: (a: number, b: number) => number;
     readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
     readonly __wbindgen_export3: (a: number) => void;
