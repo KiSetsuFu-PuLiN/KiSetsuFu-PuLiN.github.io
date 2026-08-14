@@ -157,10 +157,15 @@
 }
 
 
-/* 右上角文本通知：主题外观，固定定位由 Rust 内联样式提供 */
-.toast-2b8e813 {
+/* 右上角通知容器：主题定位与间距，flex 布局由 Rust 内联样式提供 */
+.notices-2b8e813 {
   top: var(--spacing-1);
   right: var(--spacing-1);
+  gap: var(--spacing-1);
+}
+
+/* 通知条主题外观：布局由父容器 flex 提供 */
+.notice-2b8e813 {
   padding: var(--spacing-1);
   background: var(--color-background-2);
   border: 1px solid var(--color-border);
