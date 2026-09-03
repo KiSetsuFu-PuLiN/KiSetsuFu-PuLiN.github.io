@@ -30,6 +30,8 @@
 }
 
 :root {
+  --font: "fusion-pixel-12-monospaced", monospace;
+
   --color-background-0: #01051b;
   --color-background-1: #060f24;
   --color-background-2: #0e1b35;
@@ -48,18 +50,21 @@
   --radius-0: 0px;
   --radius-1: 4px;
 
+  --width-border: 1px;
+
   --spacing-0: 0px;
   --spacing-1: 4px;
 
-  /* 字号档位（html 根字号 24px） */
+  --opacity-disabled: 0.4;
+
+  --filter-hover: brightness(1.15);
+
   --font-size-0: 0.5rem;
   --font-size-1: 0.6rem;
   --font-size-2: 0.7rem;
   --font-size-3: 0.75rem;
   --font-size-4: 1rem;
   --font-size-5: 1.15rem;
-
-  --font: "fusion-pixel-12-monospaced", monospace;
 }
 
 *,
@@ -99,6 +104,14 @@ button,
 select,
 code {
   font-family: inherit;
+}
+
+button:hover {
+  filter: var(--filter-hover);
+}
+
+button:disabled {
+  opacity: var(--opacity-disabled);
 }
 
 input:focus,
